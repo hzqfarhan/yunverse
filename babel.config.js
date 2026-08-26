@@ -1,12 +1,13 @@
 module.exports = function (api) {
-  api.cache(true);
-
   const isNext = api.caller(
     caller =>
-      caller &&
-      (caller.name === 'babel-loader' ||
-        caller.name === 'next-babel-turbo' ||
-        caller.name === '@next/babel-plugin-document-import'),
+      Boolean(
+        caller &&
+          (caller.name === 'babel-loader' ||
+            caller.name === 'next-babel-turbo' ||
+            caller.name === '@next/babel-plugin-document-import' ||
+            caller.name === 'next-babel-loader'),
+      ),
   );
 
   if (isNext) {
