@@ -1,0 +1,133 @@
+import { ExpoConfig, ConfigContext } from 'expo/config';
+
+const packageJson = require('./package.json');
+
+const IS_DEV = process.env.EXPO_PUBLIC_APP_VARIANT === 'development';
+
+const getEnvironment = () => {
+  if (IS_DEV) {
+    return {
+      name: 'Demos Dev',
+      scheme: 'demos-dev',
+      bundleIdentifier: 'com.demos.dev',
+      apsEnvironment: 'development',
+    };
+  }
+  return {
+    name: 'Demos',
+    scheme: 'demos',
+    bundleIdentifier: 'com.demos.app',
+    apsEnvironment: 'production',
+  };
+};
+
+const env = getEnvironment();
+
+export default ({ config }: ConfigContext): ExpoConfig => ({
+  ...config,
+  name: env.name,
+  slug: 'demos',
+  version: packageJson.version,
+  orientation: 'portrait',
+  runtimeVersion: {
+    policy: 'appVersion',
+  },
+  icon: './assets/icon.png',
+  userInterfaceStyle: 'dark',
+  scheme: env.scheme,
+  updates: {
+    url: 'https://u.expo.dev/eb1bbf17-5fb9-4743-bccf-3fbcbc95176a',
+    enabled: true,
+    fallbackToCacheTimeout: 0,
+  },
+  assetBundlePatterns: ['**/*'],
+  ios: {
+    supportsTablet: false,
+    config: {
+      usesNonExemptEncryption: false,
+    },
+    bundleIdentifier: env.bundleIdentifier,
+    entitlements: {
+      'aps-environment': env.apsEnvironment,
+    },
+    infoPlist: {
+      CADisableMinimumFrameDurationOnPhone: true,
+    },
+  },
+  android: {
+    adaptiveIcon: {
+      foregroundImage: './assets/adaptive-icon.png',
+      backgroundColor: '#FFFFFF',
+    },
+    package: env.bundleIdentifier,
+  },
+  web: {
+    favicon: './assets/favicon.png',
+  },
+  plugins: [
+    'expo-asset',
+    'expo-font',
+    'expo-image',
+    [
+      'expo-color-space-plugin',
+      {
+        colorSpace: 'displayP3',
+      },
+    ],
+    'expo-router',
+    [
+      'expo-build-properties',
+      {
+        android: {
+          reactNativeReleaseLevel: 'experimental',
+          minSdkVersion: 27,
+        },
+        ios: {
+          reactNativeReleaseLevel: 'experimental',
+        },
+      },
+    ],
+    [
+      'expo-quick-actions',
+      {
+        iosActions: [
+          {
+            id: '1',
+            title: 'Leave Feedback',
+            subtitle: 'Share your thoughts',
+            icon: 'symbol:heart.fill',
+            params: {
+              href: '/',
+              action: 'feedback',
+            },
+          },
+        ],
+      },
+    ],
+    'expo-sqlite',
+    [
+      'expo-splash-screen',
+      {
+        // SDK 56 removed the top-level `splash` config — it lives here now.
+        // splash.png is a full-screen design (1284×2778), not a logo: without
+        // the legacy flag the plugin squeezes it into a ~100pt logo slot.
+        image: './assets/splash.png',
+        resizeMode: 'contain',
+        backgroundColor: '#111111',
+        enableFullScreenImage_legacy: true,
+      },
+    ],
+    'expo-status-bar',
+    './plugins/with-skia-webgpu-fix',
+    './plugins/with-nitro-autolinking',
+  ],
+  experiments: {
+    // React Compiler (babel-plugin-react-compiler) — automatic memoization.
+    reactCompiler: true,
+  },
+  extra: {
+    eas: {
+      projectId: 'eb1bbf17-5fb9-4743-bccf-3fbcbc95176a',
+    },
+  },
+});
