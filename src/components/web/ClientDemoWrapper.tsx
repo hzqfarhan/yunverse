@@ -1,6 +1,7 @@
 import React, { Component, ReactNode, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, Dimensions } from 'react-native';
-import { getAnimationComponent, getAnimationMetadata } from '../../animations/registry';
+import { getAnimationComponent } from '../../animations/registry';
+import { getMetadataForSlug } from '../../animations/metadata';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -75,7 +76,7 @@ export const ClientDemoWrapper: React.FC<ClientDemoWrapperProps> = ({ slug, isSi
   }
 
   const AnimationComponent = getAnimationComponent(slug);
-  const metadata = getAnimationMetadata(slug);
+  const metadata = getMetadataForSlug(slug);
 
   if (!AnimationComponent) {
     return (

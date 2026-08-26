@@ -12,6 +12,7 @@ module.exports = function (api) {
 
   if (isNext) {
     return {
+      sourceType: 'unambiguous',
       presets: ['next/babel'],
     };
   }

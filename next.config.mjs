@@ -40,6 +40,8 @@ const nextConfig = {
       ...(config.resolve.alias || {}),
       'react-native$': 'react-native-web',
       'react-native-nitro-modules': false,
+      '@expo/ui/swift-ui': new URL('./src/stubs/expo-ui-stub.js', import.meta.url).pathname,
+      '@expo/ui': new URL('./src/stubs/expo-ui-stub.js', import.meta.url).pathname,
     };
 
     config.resolve.extensions = [

@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, useWindowDimensions } from 'react-native';
-import { AnimationMetadata } from '../src/animations/registry';
+import { AnimationMetadata } from '../src/animations/metadata';
 import { ClientDemoWrapper } from '../src/components/web/ClientDemoWrapper';
 
 export default function WebGallery() {
