@@ -1,6 +1,5 @@
 import React, { Component, ReactNode, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, Dimensions } from 'react-native';
-import { getAnimationComponent } from '../../animations/registry';
 import { getMetadataForSlug } from '../../animations/metadata';
 
 interface ErrorBoundaryProps {
@@ -50,10 +49,19 @@ interface ClientDemoWrapperProps {
 
 export const ClientDemoWrapper: React.FC<ClientDemoWrapperProps> = ({ slug, isSimulator }) => {
   const [mounted, setMounted] = useState(false);
+  const [registryModule, setRegistryModule] = useState<any>(null);
   const [dimensions, setDimensions] = useState({ width: 375, height: 667 });
 
   useEffect(() => {
     setMounted(true);
+    import('../../animations/registry')
+      .then(mod => {
+        setRegistryModule(mod);
+      })
+      .catch(err => {
+        console.warn('Failed to load animations registry:', err);
+      });
+
     const updateDimensions = () => {
       const { width, height } = Dimensions.get('window');
       setDimensions({
@@ -66,7 +74,7 @@ export const ClientDemoWrapper: React.FC<ClientDemoWrapperProps> = ({ slug, isSi
     return () => subscription?.remove?.();
   }, [isSimulator]);
 
-  if (!mounted) {
+  if (!mounted || !registryModule) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#4A90E2" />
@@ -75,7 +83,7 @@ export const ClientDemoWrapper: React.FC<ClientDemoWrapperProps> = ({ slug, isSi
     );
   }
 
-  const AnimationComponent = getAnimationComponent(slug);
+  const AnimationComponent = registryModule.getAnimationComponent(slug);
   const metadata = getMetadataForSlug(slug);
 
   if (!AnimationComponent) {

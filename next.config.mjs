@@ -36,10 +36,15 @@ const nextConfig = {
     '@react-navigation/native-stack',
   ],
   webpack: (config, { isServer }) => {
+    config.resolve.mainFields = ['module', 'browser', 'main'];
+
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       'react-native$': 'react-native-web',
       'react-native-nitro-modules': false,
+      'react-native-gesture-handler$': 'react-native-gesture-handler/lib/module/index.js',
+      'react-native-gesture-handler': 'react-native-gesture-handler/lib/module',
+      '@expo/ui/swift-ui/modifiers': new URL('./src/stubs/expo-ui-stub.js', import.meta.url).pathname,
       '@expo/ui/swift-ui': new URL('./src/stubs/expo-ui-stub.js', import.meta.url).pathname,
       '@expo/ui': new URL('./src/stubs/expo-ui-stub.js', import.meta.url).pathname,
     };
