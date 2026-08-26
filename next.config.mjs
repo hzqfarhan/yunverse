@@ -50,6 +50,15 @@ const nextConfig = {
       ...config.resolve.extensions,
     ];
 
+    // Asset loader rule for fonts, images, and binary assets
+    config.module.rules.push({
+      test: /\.(otf|ttf|woff|woff2|eot|png|jpe?g|gif|svg|webp|astc|mp3|wav|bmp)$/i,
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/media/[name].[hash][ext]',
+      },
+    });
+
     if (!isServer) {
       config.resolve.fallback = {
         ...(config.resolve.fallback || {}),

@@ -21,7 +21,7 @@
     "ios": "expo run:ios --device",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "prebuild": "npx expo prebuild --clean",
+    "expo:prebuild": "npx expo prebuild --clean",
     "build:ios:dev": "eas build --profile development --platform=ios --auto-submit --no-wait",
     "build:ios": "eas build --profile production --platform=ios --auto-submit --no-wait",
     "submit:ios:dev": "eas submit --profile development --platform=ios",

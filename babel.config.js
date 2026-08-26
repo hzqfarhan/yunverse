@@ -1,5 +1,20 @@
 module.exports = function (api) {
   api.cache(true);
+
+  const isNext = api.caller(
+    caller =>
+      caller &&
+      (caller.name === 'babel-loader' ||
+        caller.name === 'next-babel-turbo' ||
+        caller.name === '@next/babel-plugin-document-import'),
+  );
+
+  if (isNext) {
+    return {
+      presets: ['next/babel'],
+    };
+  }
+
   return {
     presets: ['babel-preset-expo'],
     plugins: [
