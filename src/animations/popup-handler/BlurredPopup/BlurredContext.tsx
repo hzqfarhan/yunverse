@@ -43,9 +43,5 @@ const BlurredPopupContext = createContext<BlurredContextType>({
   },
 });
 
-export {
-  BlurredContextType,
-  BlurredPopupContext,
-  PopupAlignment,
-  PopupOptionType,
-};
+export { BlurredPopupContext };
+export type { BlurredContextType, PopupAlignment, PopupOptionType };
