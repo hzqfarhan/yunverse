@@ -51,7 +51,7 @@ export const Provider = <
   } = useInternalNavigation<T>();
 
   const trayRef = useRef<RetrayRef>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isActive = useSharedValue(false);
 
   const dismiss = useCallback(() => {

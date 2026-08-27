@@ -15,7 +15,7 @@ const useMutation = () => {
     'idle' | 'loading' | 'success' | 'error'
   >('idle');
   const [isLoading, setIsLoading] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const mutateAsync = useCallback(
     async (mutationFn: () => Promise<void>) => {

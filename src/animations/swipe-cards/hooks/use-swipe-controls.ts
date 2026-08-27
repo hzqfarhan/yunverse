@@ -33,7 +33,7 @@ const useSwipeControls = () => {
     refs[activeIndex.get()].current?.swipeLeft();
   }, [activeIndex.get(), refs]);
 
-  const timeouts = useRef<NodeJS.Timeout[]>([]);
+  const timeouts = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const reset = useCallback(() => {
     // reset all cards in the opposite direction with a delay

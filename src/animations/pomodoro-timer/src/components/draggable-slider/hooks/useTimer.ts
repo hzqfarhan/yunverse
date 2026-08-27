@@ -21,7 +21,7 @@ export const useTimer = ({
   const isTimerEnabled = useSharedValue(false);
 
   // References to manage timer and counter
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const counter = useRef(0);
 
   const clearCounter = useCallback(() => {
@@ -60,7 +60,7 @@ export const useTimer = ({
 
         // Check if timer has reached the target value
         if (counter.current >= toValue) {
-          clearInterval(timerRef.current as NodeJS.Timeout);
+          if (timerRef.current) clearInterval(timerRef.current);
           if (onCompletion) {
             onCompletion();
           }
