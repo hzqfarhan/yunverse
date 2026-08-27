@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
@@ -10,7 +12,6 @@ const nextConfig = {
     'react-native-safe-area-context',
     'react-native-worklets',
     'react-native-fast-confetti',
-    'react-native-pulsar',
     'react-native-redash',
     'pressto',
     'expo',
@@ -42,11 +43,12 @@ const nextConfig = {
       ...(config.resolve.alias || {}),
       'react-native$': 'react-native-web',
       'react-native-nitro-modules': false,
+      'react-native-pulsar': fileURLToPath(new URL('./src/stubs/react-native-pulsar-stub.js', import.meta.url)),
       'react-native-gesture-handler$': 'react-native-gesture-handler/lib/module/index.js',
       'react-native-gesture-handler': 'react-native-gesture-handler/lib/module',
-      '@expo/ui/swift-ui/modifiers': new URL('./src/stubs/expo-ui-stub.js', import.meta.url).pathname,
-      '@expo/ui/swift-ui': new URL('./src/stubs/expo-ui-stub.js', import.meta.url).pathname,
-      '@expo/ui': new URL('./src/stubs/expo-ui-stub.js', import.meta.url).pathname,
+      '@expo/ui/swift-ui/modifiers': fileURLToPath(new URL('./src/stubs/expo-ui-stub.js', import.meta.url)),
+      '@expo/ui/swift-ui': fileURLToPath(new URL('./src/stubs/expo-ui-stub.js', import.meta.url)),
+      '@expo/ui': fileURLToPath(new URL('./src/stubs/expo-ui-stub.js', import.meta.url)),
     };
 
     config.resolve.extensions = [
