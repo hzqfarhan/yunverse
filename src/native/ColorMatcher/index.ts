@@ -1,3 +1,5 @@
+import type { ColorMatcher } from './ColorMatcher.nitro';
+
 let ColorMatcherModule: ColorMatcher | null = null;
 try {
   const { NitroModules } = require('react-native-nitro-modules');
