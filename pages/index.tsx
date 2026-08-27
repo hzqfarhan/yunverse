@@ -1,6 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import {
+  View,
+  Text,
+  TextInput,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  useWindowDimensions,
+} from 'react-native';
 import { AnimationMetadata } from '../src/animations/metadata';
 import { ClientDemoWrapper } from '../src/components/web/ClientDemoWrapper';
 

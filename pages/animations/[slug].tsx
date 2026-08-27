@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { View, Text, StyleSheet } from 'react-native';
 import { getMetadataForSlug } from '../../src/animations/metadata';
 import { ClientDemoWrapper } from '../../src/components/web/ClientDemoWrapper';
 

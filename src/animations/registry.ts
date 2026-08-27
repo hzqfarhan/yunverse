@@ -1,14 +1,5 @@
 export type IconFamily = 'Ionicons';
 
-export interface AnimationMetadataType extends Record<string, unknown> {
-  name: string;
-  route: string;
-  iconName: string;
-  alert?: boolean;
-  iconColor?: string;
-  hideDrawerIcon?: boolean;
-}
-
 export interface IconMetadata {
   iconName: string;
 }
@@ -261,8 +252,10 @@ export const AnimationRegistry = {
   'the-little-prince': TheLittlePrinceScreen,
 } as const;
 
-import { AnimationMetadata, AnimationMetadataType } from './metadata';
-export { AnimationMetadata, AnimationMetadataType };
+import { AnimationMetadata } from './metadata';
+import type { AnimationMetadataType } from './metadata';
+export { AnimationMetadata };
+export type { AnimationMetadataType };
 
 export type AnimationSlug = keyof typeof AnimationRegistry;
 export type AnimationComponent = (typeof AnimationRegistry)[AnimationSlug];
