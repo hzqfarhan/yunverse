@@ -124,7 +124,11 @@ const styles = StyleSheet.create({
     borderColor: '#333333',
     backgroundColor: '#000000',
     overflow: 'hidden',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.8)',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 20 },
+    shadowOpacity: 0.8,
+    shadowRadius: 40,
+    elevation: 20,
   },
   loadingContainer: {
     flex: 1,

@@ -111,7 +111,7 @@ export default function WebGallery() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: '100vh' as any,
+    height: '100%',
     backgroundColor: '#0A0A0C',
   },
   header: {
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   sidebarDesktop: {
     width: 320,
-    height: 'calc(100vh - 65px)' as any,
+    height: '100%',
   },
   sidebarMobile: {
     height: 220,
@@ -238,7 +238,6 @@ const styles = StyleSheet.create({
   previewPanel: {
     flex: 1,
     backgroundColor: '#000000',
-    display: 'flex',
     flexDirection: 'column',
   },
   previewHeader: {

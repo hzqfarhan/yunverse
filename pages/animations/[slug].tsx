@@ -44,8 +44,8 @@ export default function AnimationPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: '100vh' as any,
-    width: '100vw' as any,
+    height: '100%',
+    width: '100%',
     backgroundColor: '#000000',
     overflow: 'hidden',
   },
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#333333',
-    backdropFilter: 'blur(10px)' as any,
   },
   backButton: {
     color: '#0A84FF',

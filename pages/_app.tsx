@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    minHeight: '100vh' as any,
+    minHeight: '100%',
     backgroundColor: '#000000',
   },
 });
