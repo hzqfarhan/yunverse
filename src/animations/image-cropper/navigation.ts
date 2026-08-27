@@ -17,7 +17,7 @@ type DetailCroppedImageRouteProp = RouteProp<
 
 type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
-export {
+export type {
   DetailCroppedImageRouteProp,
   RootStackParamList,
   RootStackNavigationProp,

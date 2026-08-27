@@ -241,4 +241,4 @@ export const InfiniteCircularCarousel = forwardRef(
   },
 ) => ReactElement;
 
-export { InfiniteCircularCarouselProps, InfiniteCircularCarouselRef };
+export type { InfiniteCircularCarouselProps, InfiniteCircularCarouselRef };
