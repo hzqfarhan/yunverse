@@ -50,7 +50,13 @@ const nextConfig = {
     '@react-navigation/drawer',
     '@react-navigation/native-stack',
   ],
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, webpack }) => {
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        __DEV__: process.env.NODE_ENV !== 'production',
+      })
+    );
+
     config.resolve.mainFields = ['module', 'browser', 'main'];
 
     config.resolve.alias = {
