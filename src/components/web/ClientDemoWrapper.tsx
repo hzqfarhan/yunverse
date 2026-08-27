@@ -50,6 +50,7 @@ interface ClientDemoWrapperProps {
 export const ClientDemoWrapper: React.FC<ClientDemoWrapperProps> = ({ slug, isSimulator }) => {
   const [mounted, setMounted] = useState(false);
   const [registryModule, setRegistryModule] = useState<any>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [dimensions, setDimensions] = useState({ width: 375, height: 667 });
 
   useEffect(() => {
@@ -60,6 +61,7 @@ export const ClientDemoWrapper: React.FC<ClientDemoWrapperProps> = ({ slug, isSi
       })
       .catch(err => {
         console.warn('Failed to load animations registry:', err);
+        setLoadError(err?.message || 'Unknown error');
       });
 
     const updateDimensions = () => {
@@ -73,6 +75,15 @@ export const ClientDemoWrapper: React.FC<ClientDemoWrapperProps> = ({ slug, isSi
     const subscription = Dimensions.addEventListener('change', updateDimensions);
     return () => subscription?.remove?.();
   }, [isSimulator]);
+
+  if (loadError) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={styles.errorTitle}>Failed to load registry</Text>
+        <Text style={styles.errorMessage}>{loadError}</Text>
+      </View>
+    );
+  }
 
   if (!mounted || !registryModule) {
     return (
